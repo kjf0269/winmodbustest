@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "../winmodbus/MBAPHeader.h"
-#include "../winmodbus/ModbusRequest.h"
 #include "../winmodbus/ReadCoilsRequest.h"
 
 
