@@ -23,6 +23,16 @@ TEST(MBAPHeader, MBAPContents) {
     EXPECT_EQ(buffer[6], 0x42);
 }
 
+TEST(MBAPHeader, RecvMBAPDecode) {
+    uint8_t msg[] = { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef };
+    MBAPHeader* ts = new MBAPHeader(msg);
+
+    EXPECT_EQ(ts->getTransactionId(), 0x0123);
+    EXPECT_EQ(ts->getProtocolId(), 0x4567);
+    EXPECT_EQ(ts->getLength(), 0x89ab);
+    EXPECT_EQ(ts->getUnitId(), 0xcd);
+}
+
 TEST(PDU, ReadCoilsRequest) {
     ReadCoilsRequest* ts = new ReadCoilsRequest();
     int result = ts->setQuantity(0x0120);
@@ -52,4 +62,8 @@ TEST(PDU, ReadCoilsRequestError) {
     result = ts->setQuantity(2000);
     EXPECT_EQ(result, 0);
     delete ts;
+}
+
+TEST(PDU, ReadCoilsResponse) {
+
 }
